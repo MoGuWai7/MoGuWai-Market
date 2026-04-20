@@ -17,6 +17,11 @@
         "dist/**",
         "build/**",
         ".expo/**"
+      ],
+      "env": [
+        "SUPABASE_SERVICE_ROLE_KEY",
+        "VISIT_LOG_SECRET_KEY",
+        "NEXT_PUBLIC_ADMIN_URL"
       ]
     },
     "lint": {
