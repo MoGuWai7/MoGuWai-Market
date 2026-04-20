@@ -41,8 +41,8 @@ export default function ProductEditPage() {
         return;
       }
 
-      const p = prodRes.data as Product;
-      setCategories((catRes.data ?? []) as Category[]);
+      const p = prodRes.data as unknown as Product;
+      setCategories((catRes.data ?? []) as unknown as Category[]);
       setTitle(p.title);
       setDescription(p.description ?? "");
       setPrice(String(p.price));

@@ -1,15 +1,16 @@
 // 로그인 페이지 — 이메일/비밀번호 기반 로그인
 // - next 쿼리 파라미터로 로그인 후 리다이렉트 위치를 지정 가능
+// - useSearchParams()는 Suspense로 감싸야 Next.js 15 prerender 에러를 피함
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const next = searchParams.get("next") ?? "/";
@@ -28,7 +29,6 @@ export default function LoginPage() {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
-      // Supabase 에러 메시지 한국어화
       const msg = error.message === "Invalid login credentials"
         ? "이메일 또는 비밀번호가 올바르지 않습니다."
         : error.message;
@@ -37,7 +37,6 @@ export default function LoginPage() {
       return;
     }
 
-    // 성공: 서버 세션 갱신 후 이동
     router.push(next);
     router.refresh();
   };
@@ -85,5 +84,13 @@ export default function LoginPage() {
         </Link>
       </p>
     </>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="py-20" />}>
+      <LoginForm />
+    </Suspense>
   );
 }

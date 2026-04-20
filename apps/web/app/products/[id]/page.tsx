@@ -54,7 +54,7 @@ export default function ProductDetailPage() {
       await supabase.rpc("increment_view_count" as never, { product_id: id });
     } catch { /* 조회수 증가 실패는 무시 */ }
 
-    const p = productRes.data as Product;
+    const p = productRes.data as unknown as Product;
     if (p.images) {
       p.images.sort((a, b) => a.sort_order - b.sort_order);
     }

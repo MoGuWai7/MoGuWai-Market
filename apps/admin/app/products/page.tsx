@@ -39,8 +39,8 @@ export default async function AdminProductsPage({
     })(),
   ]);
 
-  const categories = (categoriesRes.data ?? []) as Category[];
-  const products = (productsRes.data ?? []) as Product[];
+  const categories = (categoriesRes.data ?? []) as unknown as Category[];
+  const products = (productsRes.data ?? []) as unknown as Product[];
   const totalCount = productsRes.count ?? 0;
   const totalPages = Math.ceil(totalCount / LIMIT);
 

@@ -1,4 +1,5 @@
 // 관리자 대시보드 — 핵심 지표 카드 + 최근 미처리 신고 + 최근 가입 회원
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import AdminLayout from "@/components/layout/AdminLayout";
 import { ReportStatusBadge } from "@/components/ui/Badge";
@@ -46,16 +47,16 @@ async function getDashboardData(): Promise<{
       pendingReports: pendingReports ?? 0,
       todaySignups: todaySignups ?? 0,
     },
-    recentReports: (recentReports as Report[]) ?? [],
-    recentUsers: (recentUsers as User[]) ?? [],
+    recentReports: (recentReports as unknown as Report[]) ?? [],
+    recentUsers: (recentUsers as unknown as User[]) ?? [],
   };
 }
 
 const STAT_CARDS = [
-  { key: "totalUsers",    label: "전체 회원",    color: "text-blue-600",  bg: "bg-blue-50" },
-  { key: "totalProducts", label: "전체 상품",    color: "text-green-600", bg: "bg-green-50" },
-  { key: "pendingReports",label: "미처리 신고",  color: "text-red-600",   bg: "bg-red-50" },
-  { key: "todaySignups",  label: "오늘 가입",    color: "text-purple-600",bg: "bg-purple-50" },
+  { key: "totalUsers",    label: "전체 회원",    color: "text-blue-600"   },
+  { key: "totalProducts", label: "전체 상품",    color: "text-green-600"  },
+  { key: "pendingReports",label: "미처리 신고",  color: "text-red-600"    },
+  { key: "todaySignups",  label: "오늘 가입",    color: "text-purple-600" },
 ] as const;
 
 export default async function DashboardPage() {
@@ -67,7 +68,7 @@ export default async function DashboardPage() {
 
         {/* 통계 카드 */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {STAT_CARDS.map(({ key, label, color, bg }) => (
+          {STAT_CARDS.map(({ key, label, color }) => (
             <div key={key} className="bg-white rounded-xl border border-gray-200 p-5">
               <p className="text-sm text-gray-500 mb-1">{label}</p>
               <p className={`text-3xl font-bold ${color}`}>
@@ -83,9 +84,9 @@ export default async function DashboardPage() {
           <div className="bg-white rounded-xl border border-gray-200">
             <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
               <h2 className="text-sm font-semibold text-gray-900">최근 미처리 신고</h2>
-              <a href="/reports" className="text-xs text-blue-600 hover:underline">
+              <Link href="/reports" className="text-xs text-blue-600 hover:underline">
                 전체 보기
-              </a>
+              </Link>
             </div>
 
             {recentReports.length === 0 ? (
@@ -116,9 +117,9 @@ export default async function DashboardPage() {
           <div className="bg-white rounded-xl border border-gray-200">
             <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
               <h2 className="text-sm font-semibold text-gray-900">최근 가입 회원</h2>
-              <a href="/users" className="text-xs text-blue-600 hover:underline">
+              <Link href="/users" className="text-xs text-blue-600 hover:underline">
                 전체 보기
-              </a>
+              </Link>
             </div>
 
             {recentUsers.length === 0 ? (
@@ -156,13 +157,13 @@ export default async function DashboardPage() {
             { label: "카테고리 관리",href: "/categories" },
             { label: "운영 로그",    href: "/logs" },
           ].map((item) => (
-            <a
+            <Link
               key={item.href}
               href={item.href}
               className="bg-white border border-gray-200 rounded-xl px-4 py-3.5 text-sm font-medium text-gray-700 hover:border-slate-400 hover:text-slate-900 transition-colors text-center"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </div>
 

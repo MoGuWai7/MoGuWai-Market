@@ -30,7 +30,7 @@ export default async function ReportsPage({
   q = q.range(from, from + LIMIT - 1);
 
   const { data, count } = await q;
-  const reports = (data ?? []) as Report[];
+  const reports = (data ?? []) as unknown as Report[];
   const totalPages = Math.ceil((count ?? 0) / LIMIT);
 
   const buildQs = (overrides: Record<string, string>) => {

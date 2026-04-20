@@ -107,7 +107,6 @@ export default function AdminLoginPage() {
             <Button
               type="submit"
               loading={loading}
-              fullWidth
               className="mt-2 bg-slate-800 hover:bg-slate-700 w-full"
             >
               로그인

@@ -22,7 +22,7 @@ async function getHomeData() {
   return {
     latest: (latestRes.data ?? []) as unknown as Product[],
     popular: (popularRes.data ?? []) as unknown as Product[],
-    categories: (categoriesRes.data ?? []) as Category[],
+    categories: (categoriesRes.data ?? []) as unknown as Category[],
   };
 }
 

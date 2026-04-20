@@ -31,7 +31,7 @@ export default async function UsersPage({
   q = q.range(from, from + LIMIT - 1);
 
   const { data, count } = await q;
-  const users = (data ?? []) as User[];
+  const users = (data ?? []) as unknown as User[];
   const totalPages = Math.ceil((count ?? 0) / LIMIT);
 
   return (

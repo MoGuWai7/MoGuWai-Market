@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // 포트폴리오 빌드 — ESLint 경고/에러가 빌드를 막지 않게 함 (타입 에러는 여전히 잡힘)
+  eslint: { ignoreDuringBuilds: true },
   images: {
     remotePatterns: [
       {

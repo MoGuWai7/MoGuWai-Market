@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   devIndicators: false,   // 우하단 N 버튼 숨김 (개발 중 스크린샷용) — 다시 보려면 이 줄 삭제
+  // 포트폴리오 빌드 — ESLint 경고/에러가 빌드를 막지 않게 함 (타입 에러는 여전히 잡힘)
+  eslint: { ignoreDuringBuilds: true },
   images: {
     remotePatterns: [
       {

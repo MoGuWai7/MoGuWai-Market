@@ -23,7 +23,7 @@ export default async function UserDetailPage({ params }: { params: Promise<{ id:
   if (userRes.error || !userRes.data) notFound();
 
   const user = userRes.data as User;
-  const products = (productsRes.data ?? []) as Product[];
+  const products = (productsRes.data ?? []) as unknown as Product[];
 
   return (
     <AdminLayout title="회원 상세">

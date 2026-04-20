@@ -8,7 +8,7 @@ import CategoryActions from "./CategoryActions";
 export default async function CategoriesPage() {
   const supabase = await createClient();
   const { data } = await supabase.from("categories").select("*").order("sort_order");
-  const categories = (data ?? []) as Category[];
+  const categories = (data ?? []) as unknown as Category[];
 
   return (
     <AdminLayout title="카테고리 관리">

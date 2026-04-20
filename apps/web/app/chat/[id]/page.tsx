@@ -45,7 +45,7 @@ export default function ChatRoomPage() {
     ]);
 
     if (roomRes.error || !roomRes.data) { router.replace("/chat"); return; }
-    const r = roomRes.data as ChatRoom;
+    const r = roomRes.data as unknown as ChatRoom;
     if (r.buyer_id !== user.id && r.seller_id !== user.id) { router.replace("/chat"); return; }
 
     setRoom(r);
