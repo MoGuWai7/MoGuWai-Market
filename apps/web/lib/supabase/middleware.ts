@@ -1,6 +1,8 @@
 // 미들웨어용 Supabase 클라이언트 — 세션 토큰 갱신 및 라우트 보호 처리
-import { createServerClient } from "@supabase/ssr";
+import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+
+type CookieToSet = { name: string; value: string; options?: CookieOptions };
 
 // 로그인이 필요한 경로 prefix
 const PROTECTED_PATHS = [
@@ -23,7 +25,7 @@ export async function updateSession(request: NextRequest) {
         getAll() {
           return request.cookies.getAll();
         },
-        setAll(cookiesToSet) {
+        setAll(cookiesToSet: CookieToSet[]) {
           // 요청 쿠키 업데이트
           cookiesToSet.forEach(({ name, value }) =>
             request.cookies.set(name, value)
