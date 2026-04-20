@@ -22,7 +22,7 @@ export default async function UserProfilePage({ params }: { params: Promise<{ id
   if (userRes.error || !userRes.data) notFound();
 
   const user = userRes.data as User;
-  const products = (productsRes.data ?? []) as Product[];
+  const products = (productsRes.data ?? []) as unknown as Product[];
 
   return (
     <main className="min-h-screen bg-gray-50">

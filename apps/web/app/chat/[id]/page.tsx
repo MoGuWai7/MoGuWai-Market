@@ -49,7 +49,7 @@ export default function ChatRoomPage() {
     if (r.buyer_id !== user.id && r.seller_id !== user.id) { router.replace("/chat"); return; }
 
     setRoom(r);
-    setMessages((msgsRes.data ?? []) as ChatMessage[]);
+    setMessages((msgsRes.data ?? []) as unknown as ChatMessage[]);
     setLoading(false);
 
     // 읽음 처리

@@ -45,9 +45,9 @@ export default function ProfilePage() {
       setUser(userRes.data as User);
       setNickname(userRes.data?.nickname ?? "");
       setBio(userRes.data?.bio ?? "");
-      setProducts((productsRes.data ?? []) as Product[]);
-      setFavorites((favRes.data?.map((f: { product: unknown }) => f.product) ?? []) as Product[]);
-      setChats((chatRes.data ?? []) as ChatRoom[]);
+      setProducts((productsRes.data ?? []) as unknown as Product[]);
+      setFavorites((favRes.data?.map((f: { product: unknown }) => f.product) ?? []) as unknown as Product[]);
+      setChats((chatRes.data ?? []) as unknown as ChatRoom[]);
       setLoading(false);
     };
     load();

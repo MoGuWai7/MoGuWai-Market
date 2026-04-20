@@ -20,7 +20,7 @@ export default async function ChatListPage() {
     .or(`buyer_id.eq.${user.id},seller_id.eq.${user.id}`)
     .order("last_message_at", { ascending: false, nullsFirst: false });
 
-  const rooms = (data ?? []) as ChatRoom[];
+  const rooms = (data ?? []) as unknown as ChatRoom[];
 
   return (
     <main className="min-h-screen bg-gray-50">
