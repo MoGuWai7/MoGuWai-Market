@@ -1,6 +1,7 @@
 // 글로벌 헤더 — 로고, 검색창, 유저 메뉴
 // - 당근마켓식 흰 배경 + 브랜드 오렌지 포인트
-// - 인증 페이지(/login, /register)에서는 헤더 자체를 숨김
+// - 인증 페이지(/login, /register) 및 비공개 관리 페이지(/visit-log)에서는 헤더 자체를 숨김
+//   → /visit-log 는 메인 사이트 프레임과 분리된 독립 화면으로 동작해야 하므로 제외
 "use client";
 
 import { useEffect, useState } from "react";
@@ -9,7 +10,8 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import type { User } from "@supabase/supabase-js";
 
-const HIDE_ON_PATHS = ["/login", "/register"];
+// 헤더를 숨길 경로 — 인증/비공개 관리 페이지
+const HIDE_ON_PATHS = ["/login", "/register", "/visit-log"];
 
 export default function Header() {
   const pathname = usePathname();

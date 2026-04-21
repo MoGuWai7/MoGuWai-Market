@@ -4,6 +4,11 @@ import { updateSession } from "@/lib/supabase/middleware";
 import { getGeoInfo } from "@/lib/geoip";
 
 // 로그 수집 제외 경로 prefix
+// - /api/      : API 라우트 자체는 사용자 페이지 방문이 아님
+// - /_next/    : 번들/HMR 내부 요청
+// - /favicon.ico
+// - /visit-log : 비공개 관리 페이지 → 관리자가 로그 확인하러 들어오는 것까지
+//                일반 방문으로 집계되면 통계가 오염되므로 제외
 const SKIP_LOG = ["/api/", "/_next/", "/favicon.ico", "/visit-log"];
 
 function parseUA(ua: string): { os: string; browser: string; device_type: "mobile" | "desktop" | "tablet" } {
